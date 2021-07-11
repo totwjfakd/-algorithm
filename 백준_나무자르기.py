@@ -1,3 +1,4 @@
+import sys
 def get_len(arr, m) :
     num = 0
     for i in range(len(arr)) :
@@ -8,13 +9,12 @@ def get_len(arr, m) :
             num += a
     return num
 
-n, m = map(int, input().split())
-array = list(map(int, input().split()))
+n, m = map(int, sys.stdin.readline().split())
+array = list(map(int, sys.stdin.readline().split()))
 
 rt = max(array)
 lt = 1
-m2 = (lt+rt)//2
-res = get_len(array, m2)
+res = 0
 
 while lt <= rt :
     mid = (lt+rt)//2
@@ -25,6 +25,5 @@ while lt <= rt :
 
     else :
         lt = mid + 1
-        if tree_len == m :
-            res = mid
+        res = mid
 print(res)
