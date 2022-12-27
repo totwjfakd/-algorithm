@@ -1,0 +1,14 @@
+# 다이나믹 프로그래밍을 공부하다가 보니, 재귀 함수를 더 공부할 필요성을 느끼게 됐다..
+# 그래서 백준 재귀함수 문제들 부터 먼저 풀어보려 한다
+
+def fibonacci(n) :
+    if n == 0 :
+        return 0
+    elif n == 1 or n == 2 :
+        return 1
+    else :
+        return fibonacci(n-1) + fibonacci(n-2)
+
+n = int(input())
+if n <= 20 :
+    print(fibonacci(n))
