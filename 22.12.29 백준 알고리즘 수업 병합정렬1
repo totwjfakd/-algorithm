@@ -1,0 +1,56 @@
+# 병합정렬 정렬..
+# 병합 정렬 이해하고 그 다음 코드를 이해하는데 시간이 좀 오래 걸렸다
+# 혼자 짜라면 다시 못짤것같다..
+
+
+def merge_sort(arr, l, r) :
+    if (l < r) :
+        
+        m = (l+r)//2
+        #print(arr, l, m, 1)
+        merge_sort(arr, l, m)
+        #print(arr,m+1,r, 2)
+        merge_sort(arr, m+1, r)
+        
+        merge(arr, l, m, r)
+def merge(arr, l, m, r) :
+    i = l
+    j = m + 1
+    t = l
+    global m_list, k, count
+    while (i <= m and j <= r) :
+        if arr[i] <= arr[j] :
+            m_list[t] = arr[i]
+            t+=1
+            i+=1
+        else :
+            m_list[t] = arr[j]
+            t+=1
+            j+=1
+    while (i<=m) :
+        m_list[t] = arr[i]
+        t += 1
+        i += 1
+    while (j<=r) :
+        m_list[t] = arr[j]
+        t += 1
+        j += 1
+        
+    for q in range(l, r+1, 1) :
+        arr[q] = m_list[q]
+        count += 1
+        if count == k :
+            print(m_list[q])
+    
+
+        
+        
+
+
+n, k = map(int, input().split())
+count = 0
+arr = list(map(int, input().split()))
+m_list = [None for i in range(n)]
+merge_sort(arr, 0, n-1)
+if count < k :
+    print(-1)
