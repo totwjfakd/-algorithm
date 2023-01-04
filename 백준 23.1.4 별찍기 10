@@ -1,0 +1,55 @@
+# 문제에 어떻게 접근 해야할지 모르겠어서 풀이보고 소스 이해하는데 노력했다... 이런 생각은 어떻게 해야 할 수 있는건지 궁금하다
+'''
+n = 27일때
+
+stars는
+star(9)
+star(3)
+star(1)
+로 돌아가게 된다
+
+이때 각 star(n)의 모양은
+star(1)
+*
+star(3)
+***
+* *
+***
+star(9)
+*********
+* ** ** *
+*********
+***   ***
+* *   * *
+***   ***
+*********
+* ** ** *
+*********
+
+과 같은 모양을 가지게 된다.
+
+3줄의 for문이 어떻게만 작동하는지 이해한다면 금방 이해할 수 있었다.
+'''
+
+
+def star(n) :
+    if n == 1 :
+        return ["*"]
+    
+    stars = star(n//3)
+    L = []
+    
+    for S in stars :
+        L.append(S*3)
+    for S in stars :
+        L.append(S+' '*(n//3)+S)
+    for S in stars :
+        L.append(S*3)
+    return L
+
+
+
+
+
+n = int(input())
+print('\n'.join(star(n)))
