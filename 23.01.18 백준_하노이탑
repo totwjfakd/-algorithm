@@ -1,0 +1,15 @@
+# 이해하는데 3일걸림
+# 직접 생각 해서 풀었다는 생각보다 외워서 푼 느낌이 들어서 찜찜한 문제
+
+def hanoi(n, start, end, other) :
+    if n == 1 :
+        print(start, end)
+        return
+    hanoi(n-1, start, other, end) # n-1개의 탑을 other탑으로 이동
+    print(start, end) # n번째 탑을 end로 이동
+    hanoi(n-1, other, end, start) # other탑에 있던 n-1개의 탑을 end로 이동
+    
+n = int(input())
+print(2**n-1)
+
+hanoi(n, 1, 3, 2)
