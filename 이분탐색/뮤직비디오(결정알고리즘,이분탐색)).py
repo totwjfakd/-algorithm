@@ -12,13 +12,13 @@ def count(capacity) :
 n, m = map(int, input().split())
 
 sing = list(map(int, input().split()))
-
+maxx = max(sing)
 lt = 1
 rt = sum(sing)
 res = 0
 while lt < rt :
     center = (lt+rt)//2
-    if count(center) <= m :
+    if center>=maxx and count(center) <= m :
         rt = center - 1
         res = center
     else :
