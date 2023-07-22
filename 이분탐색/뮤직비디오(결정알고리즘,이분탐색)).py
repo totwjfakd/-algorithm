@@ -23,6 +23,7 @@ while lt < rt :
         res = center
     else :
         lt = center + 1
-
+if max(sing) > res :
+    res = max(sing)
 print (res)
     
