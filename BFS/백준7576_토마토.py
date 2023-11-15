@@ -19,13 +19,9 @@ def bfs() :
                     queue.append([next_y,next_x])
                     map_[next_y][next_x] = map_[y][x] + 1
 
-
-
-n, m, x = map(int, input().split())
-map_ = [[] for _ in range(x)]
-
+n, m = map(int, input().split())
+map_ = []
 dx, dy = [1, -1, 0, 0], [0, 0, 1, -1]
-
 for i in range(m) :
     map_.append(list(map(int, input().split())))
 
@@ -40,19 +36,17 @@ for i in range(m) :
             
 for i, j in queue :
     visit[i][j] = 1
-ans = bfs()
+bfs()
 max_num = 0
+
 for i in range(m) :
     if max(map_[i]) > max_num :
         max_num = max(map_[i])
-
-
+    print(map_[i])
 for i in range(m) :
     for j in range(n) :
         if visit[i][j] == 0 and map_[i][j] == 0 :
             print(-1)
             exit()
-        
-
 else :
     print(max_num)
