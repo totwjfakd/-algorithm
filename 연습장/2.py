@@ -1,33 +1,21 @@
 import sys
-sys.setrecursionlimit(2500)
-
-def dfs(node, value):
-    global max_dist, farthest_node
-    visit[node] = True
-    if value > max_dist:
-        max_dist = value
-        farthest_node = node
-
-    for next_node, weight in tree[node]:
-        if not visit[next_node]:
-            dfs(next_node, value + weight)
-
-n = int(input())
-tree = [[] for _ in range(n + 1)]
-for _ in range(n - 1):
-    s, e, v = map(int, input().split())
-    tree[s].append((e, v))
-    tree[e].append((s, v))
-
-# Step 1: Find the farthest node from an arbitrary node (e.g., node 1)
-visit = [False] * (n + 1)
-max_dist = 0
-farthest_node = 1
-dfs(1, 0)
-
-# Step 2: Find the farthest node from the node found in step 1
-visit = [False] * (n + 1)
-max_dist = 0
-dfs(farthest_node, 0)
-
-print(max_dist)
+from collections import deque
+N, K= map(int, sys.stdin.readline().split())
+queue = deque()
+queue.append(N)
+way = [0]*100001 # 최대 크기
+cnt, result = 0,0
+while queue:
+    a =  queue.popleft()
+    temp = way[a]
+    if a == K: # 둘이 만났을 때
+        result = temp # 결과
+        cnt += 1 # 방문 횟수 +1
+        continue
+    
+    for i in [a-1, a+1, a*2]:
+        if 0 <= i < 100001 and (way[i] == 0 or way[i]== way[a] +1): #범위 안에있고 방문하지 않았거나, 다음 방문이 이전 방문+1이면
+            way[i] = way[a] + 1
+            queue.append(i) 
+print(result)
+print(cnt)
