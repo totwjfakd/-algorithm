@@ -1,17 +1,18 @@
 import sys
-import heapq
 
 input = sys.stdin.readline
+while True :
+    n, m = map(int, input().split())
+    if n == 0 and m == 0 :
+        break
+    dict_ = {}
 
-n = int(input())
-heap = []
-for i in range(n) :
-    x = int(input())
-    if x == 0 :
-        if not heap :
-            print(0)
-        else :
-            print(heapq.heappop(heap)[1])
+    for i in range(n) :
+        dict_[int(input())] = 1
+    count = 0 
+    for i in range(m) :
+        num = int(input())
+        if num in dict_ : 
+            count += 1
 
-    else :
-        heapq.heappush(heap, (abs(x), x))
+    print(count)
