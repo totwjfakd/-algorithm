@@ -1,25 +1,26 @@
 import sys
 
-def calculate_min_cost(n, w, current_path, visited, current_cost):
-    global min_cost
-    if len(current_path) == n and w[current_path[-1]][current_path[0]] > 0:
-        total_cost = current_cost + w[current_path[-1]][current_path[0]]
-        min_cost = min(min_cost, total_cost)
+def dfs(depth, choice, visit, start) :
+    global count
+    if depth == N+1 :
         return
-    
-    for next_city in range(n):
-        if not visited[next_city] and w[current_path[-1]][next_city] > 0:
-            visited[next_city] = True
-            calculate_min_cost(n, w, current_path + [next_city], visited, current_cost + w[current_path[-1]][next_city])
-            visited[next_city] = False
+    if depth >= 2 :
+        if L <= sum(choice) <= R and max(choice) - min(choice) >= X:
+            count += 1
+    for i in range(start, N) :
+        if not visit[i] :
+            visit[i] = True
+            dfs(depth+1, choice + [A[i]], visit, i)
+            visit[i] = False
+count = 0
 
-n = int(input())
-w = [list(map(int, input().split())) for _ in range(n)]
+N, L, R, X = map(int, input().split())
 
-min_cost = sys.maxsize
-for i in range(n):
-    visit = [False for _ in range(n)]
+A = list(map(int, input().split()))
+
+for i in range(N) :
+    visit = [False for _ in range(N)]
+
     visit[i] = True
-    calculate_min_cost(n, w, [i], visit, 0)
-
-print(min_cost)
+    dfs(1,[A[i]], visit, i)
+print(count)
