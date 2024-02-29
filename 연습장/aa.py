@@ -1,54 +1,22 @@
-import sys
-from collections import deque
-
-def make_combination(select_count, select_xy, visit, start) :
-    global combination
-    if select_count == m :
-        combination.append(select_xy)
+def dfs(depth, make_string, start) :
     
-    for i in range(start, len(chicken_xy)) :
+    if depth == L :
+        if len(set(make_string) & vowel_set) >= 1 and len(set(make_string) & consonant_set) >= 2:
+            print(''.join(make_string))
+        return
+    for i in range(start, C) :
         if visit[i] :
             continue
         visit[i] = True
-        make_combination(select_count+1, select_xy+[chicken_xy[i]], visit, i+1)
+        dfs(depth+1, make_string+[alphabet[i]], i+1)
         visit[i] = False
 
 
+L, C = map(int, input().split())
+alphabet = list(map(str, input().split()))
+alphabet.sort()
+vowel_set = set(('a', 'e', 'i', 'o', 'u'))
+consonant_set = set(('b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'))
+visit = [False for _ in range(C)]
 
-input = sys.stdin.readline
-
-n, m = map(int, input().split())
-
-map_ = [list(map(int, input().split())) for _ in range(n)]
-
-chicken_xy = []
-home_xy = []
-for i in range(n) :
-    for j in range(n) :
-        if map_[i][j] == 2 :
-            chicken_xy.append((i,j))
-        elif map_[i][j] == 1:
-            home_xy.append((i,j))
-print(chicken_xy)
-combination = []
-visit = [False for _ in range(len(chicken_xy))]
-
-make_combination(0, [], visit, 0)
-
-print(combination)
-print(len(combination))
-
-dx, dy = [-1, 0, 1, 1, 1, 0, -1, -1], [-1, -1, -1, 0, 1, 1, 1, 0]
-ans = 9999999
-for chicken_ in combination :
-    sum_ = 0
-    for home_ in home_xy :
-        min_ = 99999
-        for tuple_ in chicken_ :
-            minus = abs(tuple_[0] - home_[0]) + abs(tuple_[1] - home_[1])
-            if min_ > minus :
-                min_ = minus
-        sum_ += min_
-    if sum_ < ans :
-        ans = sum_
-print(ans)
+dfs(0, [], 0)
