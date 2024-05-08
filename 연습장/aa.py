@@ -1,8 +1,21 @@
-inpdata = input().split()
-a = int(inpdata[0])
-b = int(inpdata[1])
-x = int(inpdata[2])
+def combi(depth, make_arr) :
+    if depth == 7 :
+        sum_ = 0
+        for i in make_arr :
+            sum_ += arr[i]
+        if sum_ == 100 :
+            for i in make_arr :
+                print(arr[i])
+            exit()
+    for j in range(9) :
+        if not j in make_arr :
+            make_arr.append(j)
+            combi(depth+1, make_arr)
+            make_arr.pop()
 
-#아래에 변수 a, b, x에 대한 y를 계산하고 y의 값을 출력하시오.
-y = 10**3 + (5/3)*10 + (5/(3*3))**2
-print(y)
+arr = []
+for i in range(9) :
+    arr.append(int(input()))
+arr.sort()
+
+combi(0, [])

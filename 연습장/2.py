@@ -1,27 +1,20 @@
-import sys
-input = sys.stdin.readline
+import math
 
-n = int(input())
+def calculate_speed_and_direction(x, y):
+    # 벡터의 방향을 계산하고, 라디안에서 도 단위로 변환
+    direction = math.degrees(math.atan2(y, x))
+    
+    # 벡터의 크기 계산
+    speed = math.sqrt(x**2 + y**2)
+    
+    return direction, speed
 
-arr = []
+# 주어진 벡터 값
+x = -29.287765534821393
+y = -6.526658063337438
 
-for i in range(n) :
-    arr.append(list(map(int, input().split())))
-arr.sort(key=lambda x:x[0])
+# 방향과 속력 계산
+direction, speed = calculate_speed_and_direction(x, y)
 
-for i in range(n) :
-    if i == 0:
-        start, end = arr[i][0], arr[i][1]
-        ans = end-start
-    new_start, new_end = arr[i][0], arr[i][1]
-    if end >= new_start :
-        if end >= new_end :
-            continue
-        ans += new_end - end
-        end = new_end
-        
-    else :
-        start = new_start
-        end = new_end
-        ans += end-start
-print(ans)
+print("방향(도):", direction)
+print("속력:", speed)
