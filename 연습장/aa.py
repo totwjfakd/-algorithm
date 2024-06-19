@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import sys
 
 input = sys.stdin.readline
@@ -37,5 +36,3 @@ for i in range(n):
                 ans += 1
 
 print(ans)
-=======
->>>>>>> origin/lab
